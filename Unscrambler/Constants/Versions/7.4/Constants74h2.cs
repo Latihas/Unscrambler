@@ -7,16 +7,16 @@ public static partial class GameConstants
         return new VersionConstants
         {
             GameVersion = "2025.12.23.0000.0000",
-            TableOffsets = [0x21EF370, 0x21FF410, 0x220AD90],
-            TableSizes = [16422 * 4, 11869 * 4, 26040 * 4],
+            TableOffsets = [0x21EC900, 0x21FC9A0, 0x2208320],//-2A70
+            TableSizes = [16424 * 4, 11872 * 4, 26040 * 4],
             TableRadixes = [119, 83, 105],
             TableMax = [138, 143, 248],
-            MidTableOffset = 0x21EEC70,
+            MidTableOffset = 0x21EC200,
             MidTableSize = 224 * 8,
-            DayTableOffset = 0x2224470,
+            DayTableOffset = 0x2221A00,
             DayTableSize = 28 * 4,
             OpcodeKeyTableSize = 108 * 4,
-            OpcodeKeyTableOffset = 0x22244E0,
+            OpcodeKeyTableOffset = 0x2221A70,
             ObfuscationEnabledMode = 29,
             InitZoneOpcode = 0x242,
             UnknownObfuscationInitOpcode = 0x318,

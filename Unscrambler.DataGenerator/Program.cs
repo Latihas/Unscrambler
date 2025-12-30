@@ -1,12 +1,11 @@
-﻿using System.Text.Json.Serialization;
-using PeNet;
-using Unscrambler;
+﻿using PeNet;
 using Unscrambler.Constants;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
+        string[] args = [@"C:\Program Files (x86)\上海数龙科技有限公司\最终幻想XIV\game\ffxiv_dx11.exe", "../../Unscrambler/Data"];
         var exe = args[0];
         if (!File.Exists(exe))
         {
