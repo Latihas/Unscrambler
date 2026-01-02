@@ -4,23 +4,19 @@ using Unscrambler.Unscramble.Versions;
 
 namespace Unscrambler;
 
-public abstract class UnscramblerFactory
-{
-    public static IUnscrambler ForGameVersion(string gameVersion)
-    {
+public abstract class UnscramblerFactory {
+    public static IUnscrambler ForGameVersion(string gameVersion) {
         if (VersionConstants.Constants.TryGetValue(gameVersion, out var constants))
             return Create(constants);
         throw new ArgumentException($"Unsupported game version: {gameVersion}");
     }
-    
-    private static IUnscrambler Create(VersionConstants constants)
-    {
-        IUnscrambler unscrambler = constants.GameVersion switch
-        {
+
+    private static IUnscrambler Create(VersionConstants constants) {
+        IUnscrambler unscrambler = constants.GameVersion switch {
             "2025.12.23.0000.0000" => new Unscrambler73(),
             _ => throw new ArgumentException($"Unsupported game version: {constants.GameVersion}")
         };
-        
+
         unscrambler.Initialize(constants);
         return unscrambler;
     }

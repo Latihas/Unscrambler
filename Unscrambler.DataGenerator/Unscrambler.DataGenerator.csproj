@@ -1,18 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <OutputPath>bin</OutputPath>
-    </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputPath>bin</OutputPath>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="PeNet" Version="5.1.0" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="PeNet" Version="5.1.0"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Unscrambler\Unscrambler.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Unscrambler\Unscrambler.csproj"/>
+  </ItemGroup>
 
 </Project>

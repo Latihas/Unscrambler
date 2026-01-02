@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    </PropertyGroup>
-    
-    <ItemGroup>
-        <None Remove="Data\**"/>
-        <EmbeddedResource Include="Data\**\*.bin">
-            <LogicalName>$([System.String]::Copy('%(RecursiveDir)%(Filename)%(Extension)').Replace('\', '.').Replace('/', '.'))</LogicalName>
-        </EmbeddedResource>
-    </ItemGroup>
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Data\**"/>
+    <EmbeddedResource Include="Data\**\*.bin">
+      <LogicalName>$([System.String]::Copy('%(RecursiveDir)%(Filename)%(Extension)').Replace('\', '.').Replace('/', '.'))</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

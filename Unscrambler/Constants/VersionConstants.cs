@@ -2,8 +2,7 @@
 
 namespace Unscrambler.Constants;
 
-public class VersionConstants
-{
+public class VersionConstants {
     public string GameVersion { get; init; }
 
     public byte ObfuscationEnabledMode { get; init; }
@@ -18,7 +17,7 @@ public class VersionConstants
 
     public long DayTableOffset { get; init; }
     public int DayTableSize { get; init; }
-    
+
     public long OpcodeKeyTableOffset { get; init; }
     public int OpcodeKeyTableSize { get; init; }
 
@@ -28,14 +27,10 @@ public class VersionConstants
     public Dictionary<string, int> ObfuscatedOpcodes { get; init; } = [];
     public static Dictionary<string, VersionConstants> Constants { get; } = [];
 
-    static VersionConstants()
-    {
+    static VersionConstants() {
         var _74h2 = GameConstants.For74h2();
         Constants.Add(_74h2.GameVersion, _74h2);
     }
 
-    public static VersionConstants ForGameVersion(string gameVersion)
-    {
-        return Constants[gameVersion];
-    }
+    public static VersionConstants ForGameVersion(string gameVersion) => Constants[gameVersion];
 }

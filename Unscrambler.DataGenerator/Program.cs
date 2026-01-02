@@ -1,33 +1,28 @@
 ﻿using PeNet;
 using Unscrambler.Constants;
 
-public class Program
-{
-    public static void Main()
-    {
+public class Program {
+    public static void Main() {
         string[] args = [@"C:\Program Files (x86)\上海数龙科技有限公司\最终幻想XIV\game\ffxiv_dx11.exe", "../../Unscrambler/Data"];
         var exe = args[0];
-        if (!File.Exists(exe))
-        {
+        if (!File.Exists(exe)) {
             Console.WriteLine("File not found.");
             return;
         }
-        
+
         var directory = Directory.GetParent(exe)!.FullName;
         var verFile = Path.Combine(directory, "ffxivgame.ver");
-        if (!File.Exists(verFile))
-        {
+        if (!File.Exists(verFile)) {
             Console.WriteLine("Version file not found.");
             return;
         }
-        
+
         var version = File.ReadAllText(verFile);
-        if (!VersionConstants.Constants.TryGetValue(version, out var table))
-        {
+        if (!VersionConstants.Constants.TryGetValue(version, out var table)) {
             Console.WriteLine($"Config for version {version} not found.");
             return;
         }
-        
+
         Console.WriteLine($"Generating data for {version}");
 
         var data = File.ReadAllBytes(args[0]);
@@ -41,26 +36,22 @@ public class Program
         DumpArrays(table, data, adjustment, outDir);
     }
 
-    private static void DumpArrays(VersionConstants table, byte[] data, uint adjustment, string outDir)
-    {
-        DumpArray(data, table.TableOffsets[0]- (nint)adjustment, table.TableSizes[0], Path.Combine(outDir, "table0.bin"));
+    private static void DumpArrays(VersionConstants table, byte[] data, uint adjustment, string outDir) {
+        DumpArray(data, table.TableOffsets[0] - (nint)adjustment, table.TableSizes[0], Path.Combine(outDir, "table0.bin"));
         DumpArray(data, table.TableOffsets[1] - (nint)adjustment, table.TableSizes[1], Path.Combine(outDir, "table1.bin"));
         DumpArray(data, table.TableOffsets[2] - (nint)adjustment, table.TableSizes[2], Path.Combine(outDir, "table2.bin"));
         DumpArray(data, table.MidTableOffset - (nint)adjustment, table.MidTableSize, Path.Combine(outDir, "midtable.bin"));
         DumpArray(data, table.DayTableOffset - (nint)adjustment, table.DayTableSize, Path.Combine(outDir, "daytable.bin"));
-        
+
         if (table.OpcodeKeyTableOffset != 0)
             DumpArray(data, table.OpcodeKeyTableOffset - (nint)adjustment, table.OpcodeKeyTableSize, Path.Combine(outDir, "opcodekeytable.bin"));
-        
     }
-    
-    private static void DumpArray(byte[] data, long offset, int length, string path)
-    {
-        if (File.Exists(path)) 
+
+    private static void DumpArray(byte[] data, long offset, int length, string path) {
+        if (File.Exists(path))
             File.Delete(path);
         var f = File.OpenWrite(path);
-        for (int i = 0; i < length; i++)
-        {
+        for (var i = 0; i < length; i++) {
             f.WriteByte(data[offset + i]);
         }
         f.Flush();
