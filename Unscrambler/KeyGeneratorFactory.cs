@@ -26,22 +26,6 @@ public abstract class KeyGeneratorFactory
     private static IKeyGenerator GetKeyGenerator(VersionConstants constants) =>
         constants.GameVersion switch
         {
-            "2025.03.18.0000.0000" => new KeyGenerator72(),
-            "2025.03.27.0000.0000" => new KeyGenerator72(),
-            "2025.04.16.0000.0000" => new KeyGenerator72(),
-            "2025.05.17.0000.0000" => new KeyGenerator72(),
-            "2025.06.10.0000.0000" => new KeyGenerator72(),
-            "2025.06.19.0000.0000" => new KeyGenerator72(),
-            "2025.06.28.0000.0000" => new KeyGenerator72(),
-            "2025.07.30.0000.0000" => new KeyGenerator73(),
-            "2025.08.07.0000.0000" => new KeyGenerator73(),
-            "2025.08.22.0000.0000" => new KeyGenerator73(),
-            "2025.09.04.0000.0000" => new KeyGenerator73(),
-            "2025.09.30.0000.0000" => new KeyGenerator73(),
-            "2025.10.13.0000.0000" => new KeyGenerator73(),
-            "2025.10.30.0000.0000" => new KeyGenerator73(),
-            "2025.12.09.0000.0000" => new KeyGenerator74(),
-            "2025.12.18.0000.0000" => new KeyGenerator74(),
             "2025.12.23.0000.0000" => new KeyGenerator74(),
             _ => throw new ArgumentException($"Unsupported game version: {constants.GameVersion}")
         };

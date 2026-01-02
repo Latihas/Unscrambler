@@ -45,7 +45,7 @@ public static partial class GameConstants
                 { "UnknownEffect16", 0x241 },
                 { "ActionEffect02", 0x392 },
                 { "ActionEffect04", 0x3E5 }
-            },
+            }
         };
     }
 }

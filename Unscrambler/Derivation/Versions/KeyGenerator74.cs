@@ -142,7 +142,7 @@ public class KeyGenerator74 : IKeyGenerator
             0 => _table0[tableIndex],
             1 => _table1[tableIndex],
             2 => _table2[tableIndex],
-            _ => 0,
+            _ => 0
         };
         
         return (byte)(nSeed1 + midTableValue + dayTableValue + setResult);
