@@ -13,7 +13,7 @@ public abstract class UnscramblerFactory {
 
     private static IUnscrambler Create(VersionConstants constants) {
         IUnscrambler unscrambler = constants.GameVersion switch {
-            "2025.12.23.0000.0000" => new Unscrambler73(),
+            "2026.01.21.0000.0000" => new Unscrambler73(),
             _ => throw new ArgumentException($"Unsupported game version: {constants.GameVersion}")
         };
 
