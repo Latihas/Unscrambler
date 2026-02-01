@@ -16,12 +16,8 @@ public abstract class KeyGeneratorFactory {
     public static IKeyGenerator WithConstants(VersionConstants constants, byte[] table0, byte[] table1, byte[] table2, byte[] midTable, byte[] dayTable, byte[]? opcodeKeyTable = null) =>
         Create(constants, table0, table1, table2, midTable, dayTable, opcodeKeyTable);
 
-    private static IKeyGenerator GetKeyGenerator(VersionConstants constants) =>
-        constants.GameVersion switch {
-            "2025.12.23.0000.0000" => new KeyGenerator74(),
-            "2026.01.21.0000.0000" => new KeyGenerator74(),
-            _ => throw new ArgumentException($"Unsupported game version: {constants.GameVersion}")
-        };
+    private static IKeyGenerator GetKeyGenerator(VersionConstants _) => new KeyGenerator74();
+         
 
     private static IKeyGenerator Create(VersionConstants constants, string? tableBinaryBasePath = null) {
         var keyGenerator = GetKeyGenerator(constants);
