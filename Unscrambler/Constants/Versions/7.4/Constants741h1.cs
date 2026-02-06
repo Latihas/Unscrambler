@@ -1,24 +1,22 @@
 ﻿namespace Unscrambler.Constants.Versions;
 
-public static partial class GameConstants
+public static class GameConstants
 {
-    public static VersionConstants For741h1()
-    {
+    public static VersionConstants For741h1() {
         return new VersionConstants
         {
             GameVersion = "2026.01.30.0000.0000",
-            TableOffsets = [0x21F18E0, 0x2205FE0, 0x2209EE0],
+            TableOffsets = [0x21ECFF0, 0x22016F0, 0x22055F0],
             TableSizes = [20928 * 4, 4032 * 4, 13566 * 4],
             TableRadixes = [96, 96, 133],
             TableMax = [218, 42, 102],
-            MidTableOffset = 0x21F1490,
+            MidTableOffset = 0x21ECBA0,
             MidTableSize = 137 * 8,
-            DayTableOffset = 0x22172E0,
+            DayTableOffset = 0x22129F0,
             DayTableSize = 31 * 4,
             OpcodeKeyTableSize = 209 * 4,
-            OpcodeKeyTableOffset = 0x2217360,
+            OpcodeKeyTableOffset = 0x2212A70,
             ObfuscationEnabledMode = 159,
-            InitZoneOpcode = 0x2C0,
             UnknownObfuscationInitOpcode = 0xF8,
             ObfuscatedOpcodes = new Dictionary<string, int>
             {

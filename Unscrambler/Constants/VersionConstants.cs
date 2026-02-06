@@ -21,15 +21,12 @@ public class VersionConstants {
     public long OpcodeKeyTableOffset { get; init; }
     public int OpcodeKeyTableSize { get; init; }
 
-    public int InitZoneOpcode { get; init; }
     public int UnknownObfuscationInitOpcode { get; init; }
 
     public Dictionary<string, int> ObfuscatedOpcodes { get; init; } = [];
     public static Dictionary<string, VersionConstants> Constants { get; } = [];
 
     static VersionConstants() {
-        var _741 = GameConstants.For741();
-        Constants.Add(_741.GameVersion, _741);
         var _741h1 = GameConstants.For741h1();
         Constants.Add(_741h1.GameVersion, _741h1);
     }
