@@ -21,6 +21,7 @@ public class VersionConstants {
     public long OpcodeKeyTableOffset { get; init; }
     public int OpcodeKeyTableSize { get; init; }
 
+    public int InitZoneOpcode { get; init; }
     public int UnknownObfuscationInitOpcode { get; init; }
 
     public Dictionary<string, int> ObfuscatedOpcodes { get; init; } = [];

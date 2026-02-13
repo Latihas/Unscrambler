@@ -51,9 +51,8 @@ public class Program {
         if (File.Exists(path))
             File.Delete(path);
         var f = File.OpenWrite(path);
-        for (var i = 0; i < length; i++) {
+        for (var i = 0; i < length; i++) 
             f.WriteByte(data[offset + i]);
-        }
         f.Flush();
         f.Close();
     }

@@ -17,6 +17,7 @@ public static class GameConstants
             OpcodeKeyTableSize = 209 * 4,
             OpcodeKeyTableOffset = 0x2212A70,
             ObfuscationEnabledMode = 159,
+            InitZoneOpcode = 0x2C0,
             UnknownObfuscationInitOpcode = 0xF8,
             ObfuscatedOpcodes = new Dictionary<string, int>
             {
