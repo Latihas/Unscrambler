@@ -17,7 +17,7 @@ public abstract class KeyGeneratorFactory {
         Create(constants, table0, table1, table2, midTable, dayTable, opcodeKeyTable);
 
     private static IKeyGenerator GetKeyGenerator(VersionConstants _) => new KeyGenerator74();
-         
+
 
     private static IKeyGenerator Create(VersionConstants constants, string? tableBinaryBasePath = null) {
         var keyGenerator = GetKeyGenerator(constants);
