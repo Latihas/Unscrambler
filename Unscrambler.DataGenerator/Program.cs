@@ -1,7 +1,12 @@
-﻿using PeNet;
+﻿using System;
+using System.IO;
+using System.Linq;
+using PeNet;
 using Unscrambler.Constants;
 
-public class Program {
+namespace Unscrambler.DataGenerator;
+
+public static class Program {
     public static void Main() {
         string[] args = [@"C:\Program Files (x86)\上海数龙科技有限公司\最终幻想XIV\game\ffxiv_dx11.exe", "../../Unscrambler/Data"];
         var exe = args[0];

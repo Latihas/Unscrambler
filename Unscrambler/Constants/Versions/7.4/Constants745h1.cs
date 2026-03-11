@@ -1,22 +1,22 @@
 ﻿namespace Unscrambler.Constants.Versions;
 
 public static class GameConstants {
-    public static VersionConstants For745() =>
+    public static VersionConstants For745h1() =>
         new() {
             GameVersion = "2026.02.20.0000.0000",
-            TableOffsets = [0x21EE380, 0x21FE730, 0x2207C00],
-            TableSizes = [16620 * 4, 9524 * 4, 17484 * 4],
-            TableRadixes = [87, 107, 124],
-            TableMax = [191, 89, 141],
-            MidTableOffset = 0x21EE040,
-            MidTableSize = 103 * 8,
-            DayTableOffset = 0x2218D30,
-            DayTableSize = 36 * 4,
-            OpcodeKeyTableSize = 35 * 4,
-            OpcodeKeyTableOffset = 0x2218DC0,
-            ObfuscationEnabledMode = 108,
+            TableOffsets = [0x21F0480, 0x21FBE20, 0x220E0A0],
+            TableSizes = [11880 * 4, 18592 * 4, 19504 * 4],
+            TableRadixes = [107, 110, 106],
+            TableMax = [111, 169, 184],
+            MidTableOffset = 0x21EFE30,
+            MidTableSize = 201 * 8,
+            DayTableOffset = 0x2221160,
+            DayTableSize = 45 * 4,
+            OpcodeKeyTableSize = 46 * 4,
+            OpcodeKeyTableOffset = 0x2221220,
+            ObfuscationEnabledMode = 47,
             InitZoneOpcode = 0x9D,
-            UnknownObfuscationInitOpcode = 0x37F,
+            UnknownObfuscationInitOpcode = 0xED,
             ObfuscatedOpcodes = new Dictionary<string, int> {
                 {
                     "PlayerSpawn", 0x1A4
@@ -41,7 +41,7 @@ public static class GameConstants {
                 }, {
                     "Examine", 0x8B
                 }, {
-                    "UpdateGearset", 0x239
+                    "UpdateGearset", 569
                 }, {
                     "UpdateParty", 0x2A1
                 }, {
