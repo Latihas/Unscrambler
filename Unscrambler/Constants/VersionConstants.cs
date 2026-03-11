@@ -28,10 +28,8 @@ public class VersionConstants {
     public static Dictionary<string, VersionConstants> Constants { get; } = [];
 
     static VersionConstants() {
-        var _741h1 = GameConstants.For745h1();
-        Constants.Add(_741h1.GameVersion, _741h1);
-        var _745 = GameConstants.For745();
-        Constants.Add(_745.GameVersion, _745);
+        var c = GameConstants.For745h1();
+        Constants.Add(c.GameVersion, c);
     }
 
     public static VersionConstants ForGameVersion(string gameVersion) => Constants[gameVersion];
