@@ -1,0 +1,41 @@
+﻿namespace Unscrambler.Constants.Versions;
+
+public static class GameConstants {
+	public static VersionConstants For745h2() => new() {
+		GameVersion = "2026.03.17.0000.0000",
+		TableOffsets = [0x21F1460, 0x21FF1A0, 0x2205A40],
+		TableSizes = [14160 * 4, 6696 * 4, 19920 * 4],
+		TableRadixes = [121, 108, 120],
+		TableMax = [117, 62, 166],
+		MidTableOffset = 0x21F1050,
+		MidTableSize = 129 * 8,
+		DayTableOffset = 0x2219180,
+		DayTableSize = 59 * 4,
+		OpcodeKeyTableSize = 176 * 4,
+		OpcodeKeyTableOffset = 0x2219270,
+		ObfuscationEnabledMode = 96,
+		InitZoneOpcode = 0x2F2,
+		UnknownObfuscationInitOpcode = 0x107,
+		ObfuscatedOpcodes = new Dictionary<string, int> {
+			{ "PlayerSpawn", 0x109 },
+			{ "NpcSpawn", 0x328 },
+			{ "NpcSpawn2", 0xAE },
+			{ "ActionEffect01", 0x2A4 },
+			{ "ActionEffect08", 0x283 },
+			{ "ActionEffect16", 0x190 },
+			{ "ActionEffect24", 0x200 },
+			{ "ActionEffect32", 0x164 },
+			{ "StatusEffectList", 0x234 },
+			{ "StatusEffectList3", 0x388 },
+			{ "Examine", 0x14D },
+			{ "UpdateGearset", 0x212 },
+			{ "UpdateParty", 0x145 },
+			{ "ActorControl", 0x311 },
+			{ "ActorCast", 0x3B9 },
+			{ "UnknownEffect01", 0x321 },
+			{ "UnknownEffect16", 0x278 },
+			{ "ActionEffect02", 0xB6 },
+			{ "ActionEffect04", 0x35B }
+		}
+	};
+}
