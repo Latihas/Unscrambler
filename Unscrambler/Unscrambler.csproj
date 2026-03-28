@@ -29,13 +29,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.201" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="*" PrivateAssets="All"/>
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Data/**"/>
     <EmbeddedResource Include="Data/**/*.bin">
-      <LogicalName>$([System.String]::Copy('%(RecursiveDir)%(Filename)%(Extension)').Replace('\', '.').Replace('/', '.'))</LogicalName>
+      <LogicalName>$([System.String]::Copy('%(RecursiveDir)%(Filename)%(Extension)').Replace('/', '.').Replace('/', '.'))</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 </Project>
