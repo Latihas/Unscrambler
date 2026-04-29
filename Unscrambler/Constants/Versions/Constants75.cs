@@ -4,7 +4,7 @@ public static class GameConstants {
 	public static VersionConstants For75() => new() {
 		GameVersion = "2026.04.21.0000.0000",
 		TableOffsets = [0x22DC1D0, 0x22EE5C0, 0x22F9700],
-		TableSizes = [18684 * 4, 11344 * 4, 24500 * 4],
+        TableSizes = [18683 * 4, 11342 * 4, 24500 * 4],
 		TableRadixes = [119, 107, 100],
 		TableMax = [157, 106, 245],
 		MidTableOffset = 0x22DBB50,
