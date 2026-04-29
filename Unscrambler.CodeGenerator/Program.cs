@@ -8,7 +8,6 @@ namespace Unscrambler.CodeGenerator;
 public static partial class Program {
 	private static readonly VersionConstantsStub Result = new();
 	private const ulong ImageBase = 0x140000000;
-	private const string ffxivExePath = @"C:\Users\Latihas\Desktop\FFXIV_Cheat_dev\原版客户端\ffxiv_dx11.7.5.exe";
 	private static readonly byte[] OpcodeSignature = ConvertHexStringToBytes("?? ?? ?? 2B C8 ?? 8B ?? 8A ?? ?? ?? ?? 41 81");
 	private static void D(string s) => $"\t[D] {s}".WithColor(ConsoleColor.DarkGray);
 	private static void I(string s) => $"[I] {s}".WithColor(ConsoleColor.Green);
@@ -213,7 +212,7 @@ public static partial class Program {
 		}
 		Result.GameVersion = File.ReadAllText(verFile);
 
-		var peParser = new PeParser(args.Length == 1 ? args[0] : ffxivExePath);
+		var peParser = new PeParser(args.Length == 1 ? args[0] : exe);
 		var parser = new FfxivReverseParser(peParser);
 
 		var packetFuncRva = parser.FindFunctionStartRva(parser.LocatePacketDispatcherFunc() - 3);

@@ -1,3 +1,9 @@
+# 一键完成
+
+**根据我对多个版本的修改理解，现在已经可以通过Unscrambler.CodeGenerator来生成新版本的Constant，再使用Unscrambler.DataGenerator即刻生成数据。**
+
+下面是探索过程中的相关记录。
+
 > 这里介绍了CN服如何修改
 
 以7.40patch2为例。
