@@ -177,7 +177,7 @@ public static partial class Program {
 				// int3 (0xCC) Between Funcs
 				if (code == 0xCC && _codeData[currentOffset - 1] == 0xCC) return _codeRva + currentOffset + 1;
 			}
-			throw new Exception("无法找到函数起始地址！");
+			throw new Exception("Can't Find Start of Function.");
 		}
 	}
 
@@ -193,12 +193,9 @@ public static partial class Program {
 			W("Version file not found.");
 		else
 			Result.GameVersion = File.ReadAllText(verFile);
-
 		var parser = new FfxivReverseParser(exe);
-
 		var packetFuncRva = parser.FindFunctionStartRva(parser.LocatePacketDispatcherFunc() - 3);
 		I($"PacketDispatcher_OnReceivePacket: 0x{packetFuncRva:X}");
-
 		var instructions = parser.DisassembleFunc(packetFuncRva);
 		var regexMovAddr = RegexMovAddr();
 		var regexImulAddr = RegexImulAddr();
@@ -426,7 +423,7 @@ public static partial class Program {
 						case "InitZone": Result.InitZoneOpcode = val; break;
 					}
 				}
-			} catch (Exception e){
+			} catch (Exception e) {
 				E(e.ToString());
 			}
 		}
