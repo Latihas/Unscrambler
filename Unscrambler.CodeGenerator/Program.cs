@@ -12,6 +12,7 @@ public static partial class Program {
 	private static void D(string s) => $"\t[D] {s}".WithColor(ConsoleColor.DarkGray);
 	private static void I(string s) => $"[I] {s}".WithColor(ConsoleColor.Green);
 	private static void W(string s) => $"[W] {s}".WithColor(ConsoleColor.Yellow);
+	private static void E(string s) => $"[W] {s}".WithColor(ConsoleColor.Red);
 
 	private static void WithColor(this string text, ConsoleColor color) {
 		Console.ForegroundColor = color;
@@ -25,16 +26,16 @@ public static partial class Program {
 	[GeneratedRegex(@"^imul .+?,\[.+\+(?<addr>[0123456789ABCDEF]{7})h\]$")]
 	private static partial Regex RegexImulAddr();
 
-	[GeneratedRegex(@"^imul (.+?,)?.+?,(?<val>[0123456789ABCDEF]+)h$")]
+	[GeneratedRegex("^imul (.+?,)?.+?,(?<val>[0123456789ABCDEF]+)h$")]
 	private static partial Regex RegexImul();
 
-	[GeneratedRegex(@"^call 0+14(?<addr>[0123456789ABCDEF]{7})h$")]
+	[GeneratedRegex("^call 0+14(?<addr>[0123456789ABCDEF]{7})h$")]
 	private static partial Regex RegexCallAddr();
 
-	[GeneratedRegex(@"^jn?[z|e] .+? 0+14(?<addr>[0123456789ABCDEF]{7})h$")]
+	[GeneratedRegex("^jn?[z|e] .+? 0+14(?<addr>[0123456789ABCDEF]{7})h$")]
 	private static partial Regex RegexDeriveSubCallAddr();
 
-	[GeneratedRegex(@"^cmp .+?,(?<val>.+?)h$")]
+	[GeneratedRegex("^cmp .+?,(?<val>.+?)h$")]
 	private static partial Regex RegexCmp();
 
 	[GeneratedRegex(@"^add .+?,\[.+\*4\+(?<addr>[0123456789ABCDEF]{7})h\]$")]
@@ -51,13 +52,10 @@ public static partial class Program {
 
 		public long? MidTableOffset;
 		public int? MidTableSize;
-
 		public long? DayTableOffset;
 		public int? DayTableSize;
-
 		public long? OpcodeKeyTableOffset;
 		public int? OpcodeKeyTableSize;
-
 		public int? InitZoneOpcode;
 		public int? UnknownObfuscationInitOpcode;
 
@@ -83,8 +81,6 @@ public static partial class Program {
 
 		public override string ToString() =>
 			$$"""
-			  namespace Unscrambler.Constants.Versions;
-
 			  public static class GameConstants {
 			  	public static VersionConstants ForNew() => new() {
 			  		GameVersion = "{{GameVersion}}",
@@ -124,6 +120,7 @@ public static partial class Program {
 			  		}
 			  	};
 			  }
+			  // Done. Press Enter to exit.
 			  """;
 	}
 
@@ -135,31 +132,18 @@ public static partial class Program {
 		return bytes;
 	}
 
-	private class PeParser {
-		private readonly PEHeaders _peHeaders;
-		private readonly byte[] _peData;
-
-		public PeParser(string filePath) {
-			_peData = File.ReadAllBytes(filePath);
-			_peHeaders = new PEHeaders(new MemoryStream(_peData));
-		}
-
-		public (byte[] Data, int RvaStart) GetCodeSection() {
-			var section = _peHeaders.SectionHeaders.FirstOrDefault(x => x.Name.Equals(".text", StringComparison.OrdinalIgnoreCase));
-			var data = new byte[section.SizeOfRawData];
-			Buffer.BlockCopy(_peData, section.PointerToRawData, data, 0, data.Length);
-			return (data, section.VirtualAddress);
-		}
-
-		public static ulong Ify14(int rva) => (uint)rva | ImageBase;
-	}
-
 	private class FfxivReverseParser {
 		private readonly byte[] _codeData;
 		private readonly int _codeRva;
 
-		public FfxivReverseParser(PeParser peParser) {
-			(_codeData, _codeRva) = peParser.GetCodeSection();
+		public FfxivReverseParser(string filePath) {
+			var _peData = File.ReadAllBytes(filePath);
+			var _peHeaders = new PEHeaders(new MemoryStream(_peData));
+			var section = _peHeaders.SectionHeaders.FirstOrDefault(x => x.Name.Equals(".text", StringComparison.OrdinalIgnoreCase));
+			var data = new byte[section.SizeOfRawData];
+			Buffer.BlockCopy(_peData, section.PointerToRawData, data, 0, data.Length);
+			_codeData = data;
+			_codeRva = section.VirtualAddress;
 		}
 
 		public int LocatePacketDispatcherFunc() {
@@ -197,27 +181,23 @@ public static partial class Program {
 		}
 	}
 
-	public static void Main() {
-		string[] args = [@"C:\Program Files (x86)\上海数龙科技有限公司\最终幻想XIV\game\ffxiv_dx11.exe"];
-		var exe = args[0];
+	public static void Main(string[] args) {
+		var exe = args.Length == 1 ? args[0] : @"C:\Program Files (x86)\上海数龙科技有限公司\最终幻想XIV\game\ffxiv_dx11.exe";
 		if (!File.Exists(exe)) {
-			Console.WriteLine("File not found.");
+			E("File not found.");
 			return;
 		}
 		var directory = Directory.GetParent(exe)!.FullName;
 		var verFile = Path.Combine(directory, "ffxivgame.ver");
-		if (!File.Exists(verFile)) {
-			Console.WriteLine("Version file not found.");
-			return;
-		}
-		Result.GameVersion = File.ReadAllText(verFile);
+		if (!File.Exists(verFile))
+			W("Version file not found.");
+		else
+			Result.GameVersion = File.ReadAllText(verFile);
 
-		var peParser = new PeParser(args.Length == 1 ? args[0] : exe);
-		var parser = new FfxivReverseParser(peParser);
+		var parser = new FfxivReverseParser(exe);
 
 		var packetFuncRva = parser.FindFunctionStartRva(parser.LocatePacketDispatcherFunc() - 3);
-		I($"packetFuncRva: 0x{packetFuncRva:X}");
-		I($"PacketDispatcher_OnReceivePacket: 0x{PeParser.Ify14(packetFuncRva):X}");
+		I($"PacketDispatcher_OnReceivePacket: 0x{packetFuncRva:X}");
 
 		var instructions = parser.DisassembleFunc(packetFuncRva);
 		var regexMovAddr = RegexMovAddr();
@@ -248,19 +228,18 @@ public static partial class Program {
 				index--;
 				instr = instructions[index];
 				var regexCallMatch = regexCallAddr.Match(instr.ToString());
-				if (regexCallMatch.Success && Result.TableOffsets.All(i => i == 0)) {
-					var Dirive = Convert.ToInt32(regexCallMatch.Groups["addr"].Value, 16);
-					I($"Dirive: 0x{Dirive:X}");
-					var DiriveInstructions = parser.DisassembleFunc(Dirive);
-					foreach (var il in DiriveInstructions) {
-						var regexDiriveSubCallMatch = regexDeriveSubCallAddr.Match(il.ToString());
-						if (!regexDiriveSubCallMatch.Success) continue;
-						var addr = Convert.ToInt32(regexDiriveSubCallMatch.Groups["addr"].Value, 16);
-						I($"Dirive Sub: 0x{addr:X}");
-						diriveSubs.Add(addr);
-					}
-					break;
+				if (!regexCallMatch.Success || Result.TableOffsets.Any(i => i != 0)) continue;
+				var Dirive = Convert.ToInt32(regexCallMatch.Groups["addr"].Value, 16);
+				I($"Dirive: 0x{Dirive:X}");
+				var DiriveInstructions = parser.DisassembleFunc(Dirive);
+				foreach (var il in DiriveInstructions) {
+					var regexDiriveSubCallMatch = regexDeriveSubCallAddr.Match(il.ToString());
+					if (!regexDiriveSubCallMatch.Success) continue;
+					var addr = Convert.ToInt32(regexDiriveSubCallMatch.Groups["addr"].Value, 16);
+					I($"Dirive Sub: 0x{addr:X}");
+					diriveSubs.Add(addr);
 				}
+				break;
 			}
 			if (diriveSubs.Count != 3) {
 				W($"Invalid DiriveSubs Length({diriveSubs.Count})");
@@ -407,43 +386,48 @@ public static partial class Program {
 			Result.TableSizes[2] = Result.TableRadixes[2] * Result.TableMax[2];
 			break;
 		}
-		Console.WriteLine(Result);
-		Console.WriteLine("Waiting 4 Remote Opcodes...");
-		using var httpClient = new HttpClient();
-		var shortVersion = "CN_" + Result.GameVersion[..^".0000.0000".Length]; //CN Global KR
-		var result = httpClient.GetStringAsync($"https://raw.githubusercontent.com/Yarukon/FFXIVNetworkOpcodes/master/output/{shortVersion}/machina.txt").Result;
-		foreach (var line in result.Split()) {
-			var sp = line.Split("|");
-			var val = Convert.ToInt32(sp[1], 16);
-			switch (sp[0]) {
-				case "PlayerSpawn": Result.ObfuscatedOpcodesPlayerSpawn = val; break;
-				case "NpcSpawn": Result.ObfuscatedOpcodesNpcSpawn = val; break;
-				case "NpcSpawn2": Result.ObfuscatedOpcodesNpcSpawn2 = val; break;
-				case "Ability1": Result.ObfuscatedOpcodesActionEffect01 = val; break;
-				case "Ability8": Result.ObfuscatedOpcodesActionEffect08 = val; break;
-				case "Ability16": Result.ObfuscatedOpcodesActionEffect16 = val; break;
-				case "Ability24": Result.ObfuscatedOpcodesActionEffect24 = val; break;
-				case "Ability32": Result.ObfuscatedOpcodesActionEffect32 = val; break;
-				case "StatusEffectList": Result.ObfuscatedOpcodesStatusEffectList = val; break;
-				case "StatusEffectList3": Result.ObfuscatedOpcodesStatusEffectList3 = val; break;
-				case "ActorControl": Result.ObfuscatedOpcodesActorControl = val; break;
-				case "ActorCast": Result.ObfuscatedOpcodesActorCast = val; break;
-			}
-		}
-		var result2 = httpClient.GetStringAsync($"https://raw.githubusercontent.com/Yarukon/FFXIVNetworkOpcodes/master/output/{shortVersion}/opcodes.json").Result;
-		using var doc = JsonDocument.Parse(result2);
-		var list = doc.RootElement.GetProperty("lists");
-		foreach (var item in list.GetProperty("ServerZoneIpcType").EnumerateArray().Concat(list.GetProperty("ClientZoneIpcType").EnumerateArray())) {
-			var val = item.GetProperty("opcode").GetInt32();
-			switch (item.GetProperty("name").GetString()) {
-				case "Examine": Result.ObfuscatedOpcodesExamine = val; break;
-				case "ModelEquip": Result.ObfuscatedOpcodesUpdateGearset = val; break;
-				case "UpdateParty": Result.ObfuscatedOpcodesUpdateParty = val; break;
-				case "EventAction8": Result.ObfuscatedOpcodesUnknownEffect01= val; break;
-				case "EventAction16": Result.ObfuscatedOpcodesUnknownEffect16= val; break;
-				case "EventFinish64": Result.ObfuscatedOpcodesActionEffect02= val; break;
-				case "EventFinish128": Result.ObfuscatedOpcodesActionEffect04= val; break;
-				case "InitZone": Result.InitZoneOpcode= val; break;
+		if (Result.GameVersion != null) {
+			try {
+				I("Waiting 4 Remote Opcodes...");
+				using var httpClient = new HttpClient();
+				var shortVersion = "CN_" + Result.GameVersion[..^".0000.0000".Length]; //CN Global KR
+				var result = httpClient.GetStringAsync($"https://raw.githubusercontent.com/Yarukon/FFXIVNetworkOpcodes/master/output/{shortVersion}/machina.txt").Result;
+				foreach (var line in result.Split()) {
+					var sp = line.Split("|");
+					var val = Convert.ToInt32(sp[1], 16);
+					switch (sp[0]) {
+						case "PlayerSpawn": Result.ObfuscatedOpcodesPlayerSpawn = val; break;
+						case "NpcSpawn": Result.ObfuscatedOpcodesNpcSpawn = val; break;
+						case "NpcSpawn2": Result.ObfuscatedOpcodesNpcSpawn2 = val; break;
+						case "Ability1": Result.ObfuscatedOpcodesActionEffect01 = val; break;
+						case "Ability8": Result.ObfuscatedOpcodesActionEffect08 = val; break;
+						case "Ability16": Result.ObfuscatedOpcodesActionEffect16 = val; break;
+						case "Ability24": Result.ObfuscatedOpcodesActionEffect24 = val; break;
+						case "Ability32": Result.ObfuscatedOpcodesActionEffect32 = val; break;
+						case "StatusEffectList": Result.ObfuscatedOpcodesStatusEffectList = val; break;
+						case "StatusEffectList3": Result.ObfuscatedOpcodesStatusEffectList3 = val; break;
+						case "ActorControl": Result.ObfuscatedOpcodesActorControl = val; break;
+						case "ActorCast": Result.ObfuscatedOpcodesActorCast = val; break;
+					}
+				}
+				var result2 = httpClient.GetStringAsync($"https://raw.githubusercontent.com/Yarukon/FFXIVNetworkOpcodes/master/output/{shortVersion}/opcodes.json").Result;
+				using var doc = JsonDocument.Parse(result2);
+				var list = doc.RootElement.GetProperty("lists");
+				foreach (var item in list.GetProperty("ServerZoneIpcType").EnumerateArray().Concat(list.GetProperty("ClientZoneIpcType").EnumerateArray())) {
+					var val = item.GetProperty("opcode").GetInt32();
+					switch (item.GetProperty("name").GetString()) {
+						case "Examine": Result.ObfuscatedOpcodesExamine = val; break;
+						case "ModelEquip": Result.ObfuscatedOpcodesUpdateGearset = val; break;
+						case "UpdateParty": Result.ObfuscatedOpcodesUpdateParty = val; break;
+						case "EventAction8": Result.ObfuscatedOpcodesUnknownEffect01 = val; break;
+						case "EventAction16": Result.ObfuscatedOpcodesUnknownEffect16 = val; break;
+						case "EventFinish64": Result.ObfuscatedOpcodesActionEffect02 = val; break;
+						case "EventFinish128": Result.ObfuscatedOpcodesActionEffect04 = val; break;
+						case "InitZone": Result.InitZoneOpcode = val; break;
+					}
+				}
+			} catch (Exception e){
+				E(e.ToString());
 			}
 		}
 		Console.WriteLine(Result);
