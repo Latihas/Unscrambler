@@ -1,10 +1,15 @@
-﻿namespace Unscrambler.Constants.Versions;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Unscrambler.Constants.Versions;
+
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
+[SuppressMessage("ReSharper", "UnusedType.Global")]
 public static class GameConstants {
+	[VersionConstant]
 	public static VersionConstants For75() => new() {
 		GameVersion = "2026.04.21.0000.0000",
 		TableOffsets = [0x22DC1D0, 0x22EE5C0, 0x22F9700],
-        TableSizes = [18683 * 4, 11342 * 4, 24500 * 4],
+		TableSizes = [18683 * 4, 11342 * 4, 24500 * 4],
 		TableRadixes = [119, 107, 100],
 		TableMax = [157, 106, 245],
 		MidTableOffset = 0x22DBB50,
@@ -32,10 +37,10 @@ public static class GameConstants {
 			{ "UpdateParty", 0x239 },
 			{ "ActorControl", 0x328 },
 			{ "ActorCast", 0x345 },
-			{ "UnknownEffect01", 0x3C8 },
-			{ "UnknownEffect16", 0x174 },
-			{ "ActionEffect02", 0x39A },
-			{ "ActionEffect04", 0x395 }
+			{ "UnknownEffect01", 0x174 },
+			{ "UnknownEffect16", 0x163 },
+			{ "ActionEffect02", 0x395 },
+			{ "ActionEffect04", 0x3AE }
 		}
 	};
 }
