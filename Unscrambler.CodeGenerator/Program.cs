@@ -416,10 +416,10 @@ public static partial class Program {
 						case "Examine": Result.ObfuscatedOpcodesExamine = val; break;
 						case "ModelEquip": Result.ObfuscatedOpcodesUpdateGearset = val; break;
 						case "UpdateParty": Result.ObfuscatedOpcodesUpdateParty = val; break;
-						case "EventAction8": Result.ObfuscatedOpcodesUnknownEffect01 = val; break;
-						case "EventAction16": Result.ObfuscatedOpcodesUnknownEffect16 = val; break;
-						case "EventFinish64": Result.ObfuscatedOpcodesActionEffect02 = val; break;
-						case "EventFinish128": Result.ObfuscatedOpcodesActionEffect04 = val; break;
+						case "EventAction16": Result.ObfuscatedOpcodesUnknownEffect01 = val; break;
+						case "EventAction32": Result.ObfuscatedOpcodesUnknownEffect16 = val; break;
+						case "EventFinish128": Result.ObfuscatedOpcodesActionEffect02 = val; break;
+						case "EventFinish255": Result.ObfuscatedOpcodesActionEffect04 = val; break;
 						case "InitZone": Result.InitZoneOpcode = val; break;
 					}
 				}
