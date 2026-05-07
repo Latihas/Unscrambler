@@ -27,20 +27,17 @@ public class VersionConstants {
 	public Dictionary<string, int> ObfuscatedOpcodes { get; init; } = [];
 	public static Dictionary<string, VersionConstants> Constants { get; } = [];
 
-    static VersionConstants()
-    {
-        var assembly = Assembly.GetAssembly(typeof(VersionConstants));
-        if (assembly == null) return;
-        
-        foreach (var type in assembly.GetTypes())
-        {
-            foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static))
-            {
-                if (method.GetCustomAttribute<VersionConstantAttribute>() == null) continue;
-                var constants = (VersionConstants) method.Invoke(null, null)!;
-                Constants.Add(constants.GameVersion, constants);
-            }
-        }
+	static VersionConstants() {
+		var assembly = Assembly.GetAssembly(typeof(VersionConstants));
+		if (assembly == null) return;
+
+		foreach (var type in assembly.GetTypes()) {
+			foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static)) {
+				if (method.GetCustomAttribute<VersionConstantAttribute>() == null) continue;
+				var constants = (VersionConstants)method.Invoke(null, null)!;
+				Constants.Add(constants.GameVersion, constants);
+			}
+		}
 	}
 
 	public static VersionConstants ForGameVersion(string gameVersion) => Constants[gameVersion];

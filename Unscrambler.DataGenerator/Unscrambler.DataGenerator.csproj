@@ -6,7 +6,7 @@
     <OutputPath>bin</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="PeNet" Version="6.1.0" />
+    <PackageReference Include="PeNet" Version="6.1.1" />
     <ProjectReference Include="../Unscrambler/Unscrambler.csproj"/>
   </ItemGroup>
 </Project>

@@ -81,45 +81,43 @@ public static partial class Program {
 
 		public override string ToString() =>
 			$$"""
-			  public static class GameConstants {
-			  	public static VersionConstants ForNew() => new() {
-			  		GameVersion = "{{GameVersion}}",
-			  		TableOffsets = [0x{{TableOffsets[0]:X}}, 0x{{TableOffsets[1]:X}}, 0x{{TableOffsets[2]:X}}],
-			  		TableSizes = [{{TableSizes[0]}} * 4, {{TableSizes[1]}} * 4, {{TableSizes[2]}} * 4],
-			  		TableRadixes = [{{TableRadixes[0]}}, {{TableRadixes[1]}}, {{TableRadixes[2]}}],
-			  		TableMax = [{{TableMax[0]}}, {{TableMax[1]}}, {{TableMax[2]}}],	
-			  		MidTableOffset = 0x{{MidTableOffset:X}},
-			  		MidTableSize = {{MidTableSize}} * 8,
-			  		DayTableOffset = 0x{{DayTableOffset:X}},
-			  		DayTableSize = {{DayTableSize}} * 4,
-			  		OpcodeKeyTableSize = {{OpcodeKeyTableSize}} * 4,
-			  		OpcodeKeyTableOffset = 0x{{OpcodeKeyTableOffset:X}},
-			  		ObfuscationEnabledMode = {{ObfuscationEnabledMode}},
-			  		InitZoneOpcode = 0x{{InitZoneOpcode:X}},
-			  		UnknownObfuscationInitOpcode = 0x{{UnknownObfuscationInitOpcode:X}},
-			  		ObfuscatedOpcodes = new Dictionary<string, int> {
-			  			{ "PlayerSpawn", 0x{{ObfuscatedOpcodesPlayerSpawn:X}} },
-			  			{ "NpcSpawn", 0x{{ObfuscatedOpcodesNpcSpawn:X}} },
-			  			{ "NpcSpawn2", 0x{{ObfuscatedOpcodesNpcSpawn2:X}} },
-			  			{ "ActionEffect01", 0x{{ObfuscatedOpcodesActionEffect01:X}} },
-			  			{ "ActionEffect08", 0x{{ObfuscatedOpcodesActionEffect08:X}} },
-			  			{ "ActionEffect16", 0x{{ObfuscatedOpcodesActionEffect16:X}} },
-			  			{ "ActionEffect24", 0x{{ObfuscatedOpcodesActionEffect24:X}} },
-			  			{ "ActionEffect32", 0x{{ObfuscatedOpcodesActionEffect32:X}} },
-			  			{ "StatusEffectList", 0x{{ObfuscatedOpcodesStatusEffectList:X}} },
-			  			{ "StatusEffectList3", 0x{{ObfuscatedOpcodesStatusEffectList3:X}} },
-			  			{ "Examine", 0x{{ObfuscatedOpcodesExamine:X}} },
-			  			{ "UpdateGearset", 0x{{ObfuscatedOpcodesUpdateGearset:X}} },
-			  			{ "UpdateParty", 0x{{ObfuscatedOpcodesUpdateParty:X}} },
-			  			{ "ActorControl", 0x{{ObfuscatedOpcodesActorControl:X}} },
-			  			{ "ActorCast", 0x{{ObfuscatedOpcodesActorCast:X}} },
-			  			{ "UnknownEffect01", 0x{{ObfuscatedOpcodesUnknownEffect01:X}} },
-			  			{ "UnknownEffect16", 0x{{ObfuscatedOpcodesUnknownEffect16:X}} },
-			  			{ "ActionEffect02", 0x{{ObfuscatedOpcodesActionEffect02:X}} },
-			  			{ "ActionEffect04", 0x{{ObfuscatedOpcodesActionEffect04:X}} }
-			  		}
-			  	};
-			  }
+			  public static VersionConstants ForNew() => new() {
+			  	GameVersion = "{{GameVersion}}",
+			  	TableOffsets = [0x{{TableOffsets[0]:X}}, 0x{{TableOffsets[1]:X}}, 0x{{TableOffsets[2]:X}}],
+			  	TableSizes = [{{TableSizes[0]}} * 4, {{TableSizes[1]}} * 4, {{TableSizes[2]}} * 4],
+			  	TableRadixes = [{{TableRadixes[0]}}, {{TableRadixes[1]}}, {{TableRadixes[2]}}],
+			  	TableMax = [{{TableMax[0]}}, {{TableMax[1]}}, {{TableMax[2]}}],	
+			  	MidTableOffset = 0x{{MidTableOffset:X}},
+			  	MidTableSize = {{MidTableSize}} * 8,
+			  	DayTableOffset = 0x{{DayTableOffset:X}},
+			  	DayTableSize = {{DayTableSize}} * 4,
+			  	OpcodeKeyTableSize = {{OpcodeKeyTableSize}} * 4,
+			  	OpcodeKeyTableOffset = 0x{{OpcodeKeyTableOffset:X}},
+			  	ObfuscationEnabledMode = {{ObfuscationEnabledMode}},
+			  	InitZoneOpcode = 0x{{InitZoneOpcode:X}},
+			  	UnknownObfuscationInitOpcode = 0x{{UnknownObfuscationInitOpcode:X}},
+			  	ObfuscatedOpcodes = new Dictionary<string, int> {
+			  		{ "PlayerSpawn", 0x{{ObfuscatedOpcodesPlayerSpawn:X}} },
+			  		{ "NpcSpawn", 0x{{ObfuscatedOpcodesNpcSpawn:X}} },
+			  		{ "NpcSpawn2", 0x{{ObfuscatedOpcodesNpcSpawn2:X}} },
+			  		{ "ActionEffect01", 0x{{ObfuscatedOpcodesActionEffect01:X}} },
+			  		{ "ActionEffect08", 0x{{ObfuscatedOpcodesActionEffect08:X}} },
+			  		{ "ActionEffect16", 0x{{ObfuscatedOpcodesActionEffect16:X}} },
+			  		{ "ActionEffect24", 0x{{ObfuscatedOpcodesActionEffect24:X}} },
+			  		{ "ActionEffect32", 0x{{ObfuscatedOpcodesActionEffect32:X}} },
+			  		{ "StatusEffectList", 0x{{ObfuscatedOpcodesStatusEffectList:X}} },
+			  		{ "StatusEffectList3", 0x{{ObfuscatedOpcodesStatusEffectList3:X}} },
+			  		{ "Examine", 0x{{ObfuscatedOpcodesExamine:X}} },
+			  		{ "UpdateGearset", 0x{{ObfuscatedOpcodesUpdateGearset:X}} },
+			  		{ "UpdateParty", 0x{{ObfuscatedOpcodesUpdateParty:X}} },
+			  		{ "ActorControl", 0x{{ObfuscatedOpcodesActorControl:X}} },
+			  		{ "ActorCast", 0x{{ObfuscatedOpcodesActorCast:X}} },
+			  		{ "UnknownEffect01", 0x{{ObfuscatedOpcodesUnknownEffect01:X}} },
+			  		{ "UnknownEffect16", 0x{{ObfuscatedOpcodesUnknownEffect16:X}} },
+			  		{ "ActionEffect02", 0x{{ObfuscatedOpcodesActionEffect02:X}} },
+			  		{ "ActionEffect04", 0x{{ObfuscatedOpcodesActionEffect04:X}} }
+			  	}
+			  };
 			  // Done. Press Enter to exit.
 			  """;
 	}
@@ -389,6 +387,7 @@ public static partial class Program {
 				using var httpClient = new HttpClient();
 				var shortVersion = "CN_" + Result.GameVersion[..^".0000.0000".Length]; //CN Global KR
 				var result = httpClient.GetStringAsync($"https://raw.githubusercontent.com/Yarukon/FFXIVNetworkOpcodes/master/output/{shortVersion}/machina.txt").Result;
+				File.WriteAllText($"{shortVersion}_machina.txt", result);
 				foreach (var line in result.Split()) {
 					var sp = line.Split("|");
 					var val = Convert.ToInt32(sp[1], 16);
@@ -423,6 +422,8 @@ public static partial class Program {
 						case "InitZone": Result.InitZoneOpcode = val; break;
 					}
 				}
+				var result3 = httpClient.GetStringAsync("https://raw.githubusercontent.com/NewMoe-Technology/OverlayPlugin/main/OverlayPlugin.Core/resources/opcodes.jsonc").Result;
+				File.WriteAllText($"{shortVersion}_opcodes.jsonc", result3);
 			} catch (Exception e) {
 				E(e.ToString());
 			}

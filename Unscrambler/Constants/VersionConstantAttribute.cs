@@ -1,7 +1,4 @@
 ﻿namespace Unscrambler.Constants;
 
 [AttributeUsage(AttributeTargets.Method)]
-public class VersionConstantAttribute : Attribute
-{
-    
-}
+public class VersionConstantAttribute : Attribute;
