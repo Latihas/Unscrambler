@@ -15,7 +15,7 @@ public static class GameConstants {
 		MidTableOffset = 0x22DDEA0,
 		MidTableSize = 233 * 8,
 		DayTableOffset = 0x22F8BC0,
-		DayTableSize = 95 * 4,
+		DayTableSize = 36 * 4,
 		OpcodeKeyTableSize = 35 * 4,
 		OpcodeKeyTableOffset = 0x22F8C50,
 		ObfuscationEnabledMode = 93,
