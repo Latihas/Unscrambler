@@ -429,7 +429,7 @@ public static partial class Program {
 			}
 		}
 		Console.WriteLine(Result);
-		if (Result.DayTableSize.HasValue&& Result.TableRadixes.Contains(Result.DayTableSize.Value)) W("DayTableSize Maybe Wrong.");
+		if (Result.DayTableSize.HasValue && Result.TableRadixes.Contains(Result.DayTableSize.Value)) W("DayTableSize Maybe Wrong.");
 		Console.ReadLine();
 	}
 }
