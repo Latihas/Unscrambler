@@ -6,7 +6,7 @@ namespace Unscrambler.Constants.Versions;
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 public static class GameConstants {
 	[VersionConstant]
-	public static VersionConstants For75h1() => new() {
+	public static VersionConstants For75h2() => new() {
 		GameVersion = "2026.05.01.0000.0000",
 		TableOffsets = [0x22DE5F0, 0x22E6A10, 0x22EDC70],
 		TableSizes = [8455 * 4, 7320 * 4, 11220 * 4],
@@ -21,6 +21,13 @@ public static class GameConstants {
 		ObfuscationEnabledMode = 93,
 		InitZoneOpcode = 0x237,
 		UnknownObfuscationInitOpcode = 0x3C2,
+		InitZoneLength = 168,
+		ActorControlSelfLength = 72,
+		FateInfoOpcode = 0xE1,
+		FateInfoLength = 56,
+		FateStart = 56,
+		FateEnd = 56,
+		FateProgress = 56,
 		ObfuscatedOpcodes = new Dictionary<string, int> {
 			{ "PlayerSpawn", 0x2AA },
 			{ "NpcSpawn", 0xF6 },

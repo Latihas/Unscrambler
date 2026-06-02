@@ -25,6 +25,13 @@ public class VersionConstants {
 	public int UnknownObfuscationInitOpcode { get; init; }
 
 	public Dictionary<string, int> ObfuscatedOpcodes { get; init; } = [];
+	public int InitZoneLength { get; set; }
+	public int ActorControlSelfLength { get; set; }
+	public int FateInfoOpcode { get; set; }
+	public int FateInfoLength { get; set; }
+	public int FateStart { get; set; }
+	public int FateEnd { get; set; }
+	public int FateProgress { get; set; }
 	public static Dictionary<string, VersionConstants> Constants { get; } = [];
 
 	static VersionConstants() {

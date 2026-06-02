@@ -44,14 +44,12 @@ public static class Program {
 		DumpArray(data, table.TableOffsets[2] - (nint)adjustment, table.TableSizes[2], Path.Combine(outDir, "table2.bin"));
 		DumpArray(data, table.MidTableOffset - (nint)adjustment, table.MidTableSize, Path.Combine(outDir, "midtable.bin"));
 		DumpArray(data, table.DayTableOffset - (nint)adjustment, table.DayTableSize, Path.Combine(outDir, "daytable.bin"));
-
 		if (table.OpcodeKeyTableOffset != 0)
 			DumpArray(data, table.OpcodeKeyTableOffset - (nint)adjustment, table.OpcodeKeyTableSize, Path.Combine(outDir, "opcodekeytable.bin"));
 	}
 
 	private static void DumpArray(byte[] data, long offset, int length, string path) {
-		if (File.Exists(path))
-			File.Delete(path);
+		if (File.Exists(path)) File.Delete(path);
 		var f = File.OpenWrite(path);
 		for (var i = 0; i < length; i++)
 			f.WriteByte(data[offset + i]);

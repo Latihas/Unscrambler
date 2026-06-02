@@ -41,6 +41,18 @@ public static partial class Program {
 	[GeneratedRegex(@"^add .+?,\[.+\*4\+(?<addr>[0123456789ABCDEF]{7})h\]$")]
 	private static partial Regex RegexAddAddr();
 
+	[GeneratedRegex(@"if\s*\(\s*opcode\s*==\s*MatchaOpcode\.InitZone\s*\)")]
+	private static partial Regex InitZoneRegex();
+
+	[GeneratedRegex(@"if\s*\(\s*opcode\s*==\s*MatchaOpcode\.FateInfo\s*\)")]
+	private static partial Regex FateInfoRegex();
+
+	[GeneratedRegex(@"if\s*\(\s*opcode\s*==\s*MatchaOpcode\.ActorControlSelf\s*\)")]
+	private static partial Regex ActorControlSelfRegex();
+
+	[GeneratedRegex(@"if\s*\(\s*packet.Length\s*!=\s*(?<num>\d+)\s*\)")]
+	private static partial Regex OpcodeLengthRegex();
+
 	private class VersionConstantsStub {
 		public byte? ObfuscationEnabledMode;
 		public string? GameVersion;
@@ -78,6 +90,13 @@ public static partial class Program {
 		public int? ObfuscatedOpcodesUnknownEffect16;
 		public int? ObfuscatedOpcodesActionEffect02;
 		public int? ObfuscatedOpcodesActionEffect04;
+		public int? InitZoneLength;
+		public int? ActorControlSelfLength;
+		public int? FateInfoOpcode;
+		public int? FateInfoLength;
+		public int? FateStart;
+		public int? FateEnd;
+		public int? FateProgress;
 
 		public override string ToString() =>
 			$$"""
@@ -96,6 +115,13 @@ public static partial class Program {
 			  	ObfuscationEnabledMode = {{ObfuscationEnabledMode}},
 			  	InitZoneOpcode = 0x{{InitZoneOpcode:X}},
 			  	UnknownObfuscationInitOpcode = 0x{{UnknownObfuscationInitOpcode:X}},
+			  	InitZoneLength = {{InitZoneLength}},
+			  	ActorControlSelfLength = {{ActorControlSelfLength}},
+			  	FateInfoOpcode = 0x{{FateInfoOpcode:X}},
+			  	FateInfoLength = {{FateInfoLength}},
+			  	FateStart = 56,
+			  	FateEnd = 56,
+			  	FateProgress = 56,
 			  	ObfuscatedOpcodes = new Dictionary<string, int> {
 			  		{ "PlayerSpawn", 0x{{ObfuscatedOpcodesPlayerSpawn:X}} },
 			  		{ "NpcSpawn", 0x{{ObfuscatedOpcodesNpcSpawn:X}} },
@@ -420,10 +446,48 @@ public static partial class Program {
 						case "EventFinish128": Result.ObfuscatedOpcodesActionEffect02 = val; break;
 						case "EventFinish255": Result.ObfuscatedOpcodesActionEffect04 = val; break;
 						case "InitZone": Result.InitZoneOpcode = val; break;
+						case "FateInfo": Result.FateInfoOpcode = val; break;
 					}
 				}
 				var result3 = httpClient.GetStringAsync("https://raw.githubusercontent.com/NewMoe-Technology/OverlayPlugin/main/OverlayPlugin.Core/resources/opcodes.jsonc").Result;
 				File.WriteAllText($"{shortVersion}_opcodes.jsonc", result3);
+
+				var result4 = httpClient.GetStringAsync("https://raw.githubusercontent.com/thewakingsands/matcha/master/Cafe.Matcha/Network/NetworkMonitor.cs").Result;
+
+				var regexInitZone = InitZoneRegex();
+				var regexActorControlSelf = ActorControlSelfRegex();
+				var regexFateInfo = FateInfoRegex();
+				var regexOpcodeLength = OpcodeLengthRegex();
+
+				var split = result4.Split("\n");
+				for (var index = 0; index < split.Length; index++) {
+					var line = split[index];
+					if (regexInitZone.IsMatch(line)) {
+						do {
+							line = split[++index];
+						} while (!regexOpcodeLength.IsMatch(line));
+						Result.InitZoneLength = int.Parse(regexOpcodeLength.Match(line).Groups["num"].Value);
+					}
+					if (regexFateInfo.IsMatch(line)) {
+						do {
+							line = split[++index];
+						} while (!regexOpcodeLength.IsMatch(line));
+						Result.FateInfoLength = int.Parse(regexOpcodeLength.Match(line).Groups["num"].Value);
+					}
+					if (regexActorControlSelf.IsMatch(line)) {
+						do {
+							line = split[++index];
+						} while (!regexOpcodeLength.IsMatch(line));
+						Result.ActorControlSelfLength = int.Parse(regexOpcodeLength.Match(line).Groups["num"].Value);
+					}
+				}
+
+				var result5 = httpClient.GetStringAsync("https://raw.githubusercontent.com/Yarukon/FFXIVNetworkOpcodes/master/output/enum.json").Result;
+				using var doc2 = JsonDocument.Parse(result5);
+				var ActorControlType = doc2.RootElement.GetProperty("ActorControlType");
+				Result.FateStart = ActorControlType.GetProperty("FateStart").GetInt32();
+				Result.FateProgress = ActorControlType.GetProperty("FateProgress").GetInt32();
+				Result.FateEnd = ActorControlType.GetProperty("FateEnd").GetInt32();
 			} catch (Exception e) {
 				E(e.ToString());
 			}

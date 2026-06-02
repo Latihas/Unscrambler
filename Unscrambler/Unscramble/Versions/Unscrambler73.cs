@@ -4,7 +4,7 @@ using Unscrambler.Constants;
 namespace Unscrambler.Unscramble.Versions;
 
 public unsafe class Unscrambler73 : IUnscrambler {
-	private VersionConstants _constants;
+	public VersionConstants _constants;
 
 	public void Initialize(VersionConstants constants) {
 		_constants = constants;
