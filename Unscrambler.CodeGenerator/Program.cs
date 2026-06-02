@@ -119,9 +119,9 @@ public static partial class Program {
 			  	ActorControlSelfLength = {{ActorControlSelfLength}},
 			  	FateInfoOpcode = 0x{{FateInfoOpcode:X}},
 			  	FateInfoLength = {{FateInfoLength}},
-			  	FateStart = 56,
-			  	FateEnd = 56,
-			  	FateProgress = 56,
+			  	FateStart = {{FateStart}},
+			  	FateEnd = {{FateEnd}},
+			  	FateProgress = {{FateProgress}},
 			  	ObfuscatedOpcodes = new Dictionary<string, int> {
 			  		{ "PlayerSpawn", 0x{{ObfuscatedOpcodesPlayerSpawn:X}} },
 			  		{ "NpcSpawn", 0x{{ObfuscatedOpcodesNpcSpawn:X}} },
