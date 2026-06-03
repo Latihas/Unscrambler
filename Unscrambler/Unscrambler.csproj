@@ -1,41 +1,41 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputType>Library</OutputType>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <PackageId>Unscrambler.XIV.CN</PackageId>
-	  <Version>7.50.2.0-alpha1</Version>
-    <Authors>perchbird, Latihas</Authors>
-    <Description>A library for reversing packet obfuscation in an online game.(CN Version)</Description>
-    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Latihas/unscrambler</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Latihas/unscrambler</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>unscrambler;data;utility</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSourceRevisionInInformationalVersion>true</IncludeSourceRevisionInInformationalVersion>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
-    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.300" PrivateAssets="All"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Data/**"/>
-    <EmbeddedResource Include="Data/**/*.bin">
-      <LogicalName>$([System.String]::Copy('%(RecursiveDir)%(Filename)%(Extension)').Replace('/', '.').Replace('/', '.'))</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<OutputType>Library</OutputType>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<PackageId>Unscrambler.XIV.CN</PackageId>
+		<Version>7.51.0</Version>
+		<Authors>perchbird, Latihas</Authors>
+		<Description>A library for reversing packet obfuscation in an online game.(CN Version)</Description>
+		<PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/Latihas/unscrambler</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Latihas/unscrambler</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>unscrambler;data;utility</PackageTags>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSourceRevisionInInformationalVersion>true</IncludeSourceRevisionInInformationalVersion>
+		<Deterministic>true</Deterministic>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.300" PrivateAssets="All"/>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<None Remove="Data/**"/>
+		<EmbeddedResource Include="Data/**/*.bin">
+			<LogicalName>$([System.String]::Copy('%(RecursiveDir)%(Filename)%(Extension)').Replace('/', '.').Replace('/', '.'))</LogicalName>
+		</EmbeddedResource>
+	</ItemGroup>
 </Project>

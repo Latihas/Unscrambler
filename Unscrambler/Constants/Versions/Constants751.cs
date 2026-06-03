@@ -6,7 +6,7 @@ namespace Unscrambler.Constants.Versions;
 [SuppressMessage("ReSharper", "UnusedType.Global")]
 public static class GameConstants {
 	[VersionConstant]
-	public static VersionConstants For75h2() => new() {
+	public static VersionConstants For751() => new() {
 		GameVersion = "2026.05.25.0000.0000",
 		TableOffsets = [0x22DF210, 0x22EA9B0, 0x22FBB20],
 		TableSizes = [11752 * 4, 17500 * 4, 21442 * 4],
