@@ -25,9 +25,9 @@ public static class GameConstants {
 		ActorControlSelfLength = 72,
 		FateInfoOpcode = 0x3A9,
 		FateInfoLength = 56,
-		FateStart = 2357,
-		FateEnd = 2358,
-		FateProgress = 2366,
+		FateStart = 2370,
+		FateEnd = 2357,
+		FateProgress = 2364,
 		ObfuscatedOpcodes = new Dictionary<string, int> {
 			{ "PlayerSpawn", 0x255 },
 			{ "NpcSpawn", 0x26B },

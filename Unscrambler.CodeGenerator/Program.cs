@@ -482,12 +482,12 @@ public static partial class Program {
 					}
 				}
 
-				var result5 = httpClient.GetStringAsync("https://raw.githubusercontent.com/Yarukon/FFXIVNetworkOpcodes/master/output/enum.json").Result;
-				using var doc2 = JsonDocument.Parse(result5);
-				var ActorControlType = doc2.RootElement.GetProperty("ActorControlType");
-				Result.FateStart = ActorControlType.GetProperty("FateStart").GetInt32();
-				Result.FateProgress = ActorControlType.GetProperty("FateProgress").GetInt32();
-				Result.FateEnd = ActorControlType.GetProperty("FateEnd").GetInt32();
+				var result5 = httpClient.GetStringAsync("https://raw.githubusercontent.com/thewakingsands/matcha/master/Cafe.Matcha/Constant/ActorControlType.cs").Result;
+				foreach (var line in result5.Split('\n')) {
+					if (line.Contains("FateStart")) Result.FateStart = int.Parse(line.Split('=', ',')[1].Trim());
+					if (line.Contains("FateEnd")) Result.FateEnd = int.Parse(line.Split('=', ',')[1].Trim());
+					if (line.Contains("FateProgress")) Result.FateProgress = int.Parse(line.Split('=', ',')[1].Trim());
+				}
 			} catch (Exception e) {
 				E(e.ToString());
 			}
