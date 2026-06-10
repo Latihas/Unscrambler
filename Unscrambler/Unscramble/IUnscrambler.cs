@@ -1,4 +1,5 @@
-﻿using Unscrambler.Constants;
+﻿using System;
+using Unscrambler.Constants;
 
 namespace Unscrambler.Unscramble;
 

@@ -1,4 +1,6 @@
-﻿namespace Unscrambler;
+﻿using System;
+
+namespace Unscrambler;
 
 /// <summary>
 ///     Functions to make it easier for consumers to work with opcodes.

@@ -1,4 +1,9 @@
-﻿using System.Reflection.PortableExecutable;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Reflection.PortableExecutable;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using Iced.Intel;

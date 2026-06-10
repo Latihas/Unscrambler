@@ -1,4 +1,7 @@
-﻿using PeNet;
+﻿using System;
+using System.IO;
+using System.Linq;
+using PeNet;
 using Unscrambler.Constants;
 
 namespace Unscrambler.DataGenerator;
