@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <Nullable>enable</Nullable>
-    <OutputPath>bin</OutputPath>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="PeNet" Version="6.1.2"/>
-    <ProjectReference Include="../Unscrambler/Unscrambler.csproj"/>
-  </ItemGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<Nullable>enable</Nullable>
+		<OutputPath>bin</OutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="PeNet" Version="6.1.2"/>
+		<ProjectReference Include="../Unscrambler/Unscrambler.csproj"/>
+	</ItemGroup>
 </Project>
