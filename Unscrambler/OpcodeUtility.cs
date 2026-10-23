@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Unscrambler;
 
@@ -14,6 +15,7 @@ public static class OpcodeUtility {
 	/// </summary>
 	/// <param name="packet">The packet buffer, starting at the packet header.</param>
 	/// <returns>The opcode of the packet.</returns>
+	[SuppressMessage("ReSharper", "UnusedMember.Global")]	
 	public static ushort GetOpcodeFromPacketAtPacketStart(Span<byte> packet) {
 		const int start = PacketHeaderSize + OpcodeOffset;
 		const int end = start + 2;

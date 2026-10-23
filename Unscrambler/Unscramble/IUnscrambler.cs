@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Unscrambler.Constants;
 
 namespace Unscrambler.Unscramble;
 
+[SuppressMessage("ReSharper", "UnusedMember.Global")] 
 public interface IUnscrambler {
 	/// <summary>
 	///     Set the Unscrambler instance to use the provided constants.

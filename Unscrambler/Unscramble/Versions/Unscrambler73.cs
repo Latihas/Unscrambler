@@ -149,21 +149,21 @@ public unsafe class Unscrambler73 : IUnscrambler {
 			case true when opcode == _constants.ObfuscatedOpcodes["UpdateParty"]: {
 				for (var i = 0; i < 8; i++) {
 					var offset = 456 * i;
-                    // Content id
+					// Content id
 					*(ulong*)(data + 64 + offset) -= baseKey;
-                    // Actor id
+					// Actor id
 					*(uint*)(data + 72 + offset) -= baseKey;
-                    // Entity id
+					// Entity id
 					*(uint*)(data + 76 + offset) -= baseKey;
-                    // Parent id
+					// Parent id
 					*(uint*)(data + 80 + offset) -= baseKey;
-                    // Home world id
+					// Home world id
 					*(ushort*)(data + 96 + offset) -= baseKey;
-                    // Classjob id
+					// Classjob id
 					data[101 + offset] -= baseKey;
-                    // Unknown
+					// Unknown
 					data[103 + offset] -= baseKey;
-                    // Classjob level
+					// Classjob level
 					data[105 + offset] -= baseKey;
 				}
 				break;

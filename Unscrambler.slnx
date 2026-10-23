@@ -1,5 +1,5 @@
 ﻿<Solution>
-  <Project Path="Unscrambler/Unscrambler.csproj">
-    <BuildType Project="Release" />
-  </Project>
+	<Project Path="Unscrambler/Unscrambler.csproj">
+		<BuildType Project="Release"/>
+	</Project>
 </Solution>
