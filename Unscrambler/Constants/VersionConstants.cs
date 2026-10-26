@@ -4,7 +4,7 @@ using System.Reflection;
 namespace Unscrambler.Constants;
 
 public class VersionConstants {
-	public string GameVersion { get; init; }
+	public string GameVersion { get; init; } = "";
 
 	public byte ObfuscationEnabledMode { get; init; }
 

@@ -5,7 +5,7 @@ using Unscrambler.Constants;
 namespace Unscrambler.Unscramble.Versions;
 
 public unsafe class Unscrambler73 : IUnscrambler {
-	public VersionConstants _constants;
+	public VersionConstants _constants = null!;
 
 	public void Initialize(VersionConstants constants) {
 		_constants = constants;
@@ -51,11 +51,12 @@ public unsafe class Unscrambler73 : IUnscrambler {
 	}
 
 	private void UnscrambleInternal(Span<byte> input, ushort opcode, byte baseKey, int opcodeBasedKey) {
+		var constants = _constants;
 		var data = (byte*)Unsafe.AsPointer(ref input[0]);
 
 		switch (true) {
 			// PlayerSpawn
-			case true when opcode == _constants.ObfuscatedOpcodes["PlayerSpawn"]: {
+			case true when opcode == constants.ObfuscatedOpcodes["PlayerSpawn"]: {
 				*(ulong*)(data + 24) -= baseKey; // Content ID
 				*(ushort*)(data + 36) -= baseKey; // Current world
 				*(ushort*)(data + 38) -= baseKey; // Home world
